@@ -3,6 +3,12 @@ Este é um componente multitenant para ser usado em aplicações spring-boot.
 Com este componente, pode ser configurado múltiplas fontes de dados para manter os dados em diferentes esquemas.
 Que está usando o [Hibernate suporte multi-tenancy] (https://docs.jboss.org/hibernate/orm/4.2/devguide/en-US/html/ch16.html) trabalhando com a estratégia de banco de dados separado.
 
+## Status
+* Em desenvolvimento
+* Criar as anotações - OK
+* Testar com request - OK
+* Integrar com spring-security - em desenvolvimento
+
 ## Agradecimentos
 
 Ao github https://github.com/rcandidosilva. 
