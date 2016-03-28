@@ -8,7 +8,7 @@ Que está usando o [Hibernate suporte multi-tenancy] (https://docs.jboss.org/hib
 1) Criar uma entity que implementa a interface DataSourceConfig.
 EX:
 
-<code>
+```java
 @Entity
 @Table(name="NOME_TABLE")
 public class DataSourceTable implements DataSourceConfig, Serializable {
@@ -52,4 +52,21 @@ public class DataSourceTable implements DataSourceConfig, Serializable {
         return initialize;
     }
 }
-</code>
+```
+
+2) Cruiar uma respository que implementa a interface DataSourceConfigRepository.
+
+```java
+
+@Repository
+public interface DataSourceTableRepository extends DataSourceConfigRepository<DataSourceTable>, JpaRepository<DataSourceTable, Long> {
+
+}
+
+```
+
+3) Na sua classe principal, adicionar a anotação @LoadDataSourceConfig adicionando as duas classes criadas.
+
+```java
+@LoadDataSourceConfig(config=DataSourceTable.class, configRepository=DataSourceTableRepository.class)
+```
