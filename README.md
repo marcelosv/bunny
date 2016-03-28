@@ -3,9 +3,26 @@ Este é um componente multitenant para ser usado em aplicações spring-boot.
 Com este componente, pode ser configurado múltiplas fontes de dados para manter os dados em diferentes esquemas.
 Que está usando o [Hibernate suporte multi-tenancy] (https://docs.jboss.org/hibernate/orm/4.2/devguide/en-US/html/ch16.html) trabalhando com a estratégia de banco de dados separado.
 
-## Compilar e pacote
+## Agradecimentos
 
-1) Criar uma entity que implementa a interface DataSourceConfig.
+Ao github https://github.com/rcandidosilva. 
+O projeto spring-boot-multitenant foi usado como base para este componente.
+
+
+## Configuração
+1) Baixar o projeto no git https://github.com/betao22ster/bunny, dar o install do maven.
+
+2) No seu projeto, adicionar a dependencia:
+
+```xml
+	<dependency>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>bunny</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</dependency>
+```
+		
+3) No seu projeto, criar uma entity que implementa a interface DataSourceConfig.
 EX:
 
 ```java
@@ -54,7 +71,7 @@ public class DataSourceTable implements DataSourceConfig, Serializable {
 }
 ```
 
-2) Cruiar uma respository que implementa a interface DataSourceConfigRepository.
+4) No seu projeto, criar uma respository que implementa a interface DataSourceConfigRepository.
 
 ```java
 
@@ -65,8 +82,28 @@ public interface DataSourceTableRepository extends DataSourceConfigRepository<Da
 
 ```
 
-3) Na sua classe principal, adicionar a anotação @LoadDataSourceConfig adicionando as duas classes criadas.
+5) Na sua classe principal, adicionar a anotação @LoadDataSourceConfig adicionando as duas classes criadas e a anotação @ComponentScan com o pacote do bunny.
 
 ```java
 @LoadDataSourceConfig(config=DataSourceTable.class, configRepository=DataSourceTableRepository.class)
+@ComponentScan(basePackages={"org.springframework.boot.bunny.multitenant"})
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
