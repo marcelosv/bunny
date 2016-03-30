@@ -7,7 +7,7 @@ Que está usando o [Hibernate suporte multi-tenancy] (https://docs.jboss.org/hib
 * Em desenvolvimento
 * Criar as anotações - OK
 * Testar com request - OK
-* Integrar com spring-security - em desenvolvimento
+* Integrar com spring-security - OK
 
 ## Agradecimentos
 
@@ -95,16 +95,105 @@ public interface DataSourceTableRepository extends DataSourceConfigRepository<Da
 @ComponentScan(basePackages={"org.springframework.boot.bunny.multitenant"})
 ```
 
+## Configuração do Spring Security
+Porque integrar com o Spring Security?<br>
+Quando o sistema é integrado ao Spring Security, após o login, os dados do usuário ficam registrados.<br> 
+É possível obter os dados do login como está abaixo ou injetando.<br>
 
+```java
+	SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+```
 
+Desta forma, podemos ter neste objeto, os dados que o bunny precisa.<br>
+Na classe TenantIdentifierResolver do bunny ele identifica se o já existe um usuário logado, e já retorna o identificador do tenancy.<br>
+Para nos isso é importante. 
+<br>
+Caso esteja em um projeto de micro-service, os demais serviços, iram já funcionar corretamente, identificando o tenancy pelo usuário logado.<br>
 
+Vamos configurar o spring security:
+1) Deve ser usado no maven a seguinte dependencia.
 
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+```
 
+2) Crie uma classe que vai servir para manter nosso dados de login.
 
+```java
+public class UserDetailsModify extends User implements DataSourceConfigSecurity {
 
+	private static final long serialVersionUID = 3375988537129735478L;
+	private DataSourceTable dataSourceTable;
 
+	public UserDetailsModify(String login, String senha, List<GrantedAuthority> auth, DataSourceTable dataSourceTable) {
+		super(login, senha, auth);
+		this.dataSourceTable = dataSourceTable;
+	}
 
+	@Override
+	public DataSourceConfig getDataSourceConfig() {
+		return dataSourceTable;
+	}
+	
+}
+```
 
+O importante nesta classe, para o bunny, é a implementação da classe DataSourceConfigSecurity.
+
+3) Crie um service básico, para consultar os dados do login.
+
+```java
+@Service
+public class Users implements UserDetailsService {
+
+	@Autowired
+	private UserRepository repo;
+
+	@Autowired
+	private DataSourceTableRepository repository;
+	
+	@Override
+	public OpsUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+		
+		// sua entidade da tabela de usuário normal
+		Usuario user = repo.findByEmail(email);
+		
+		if (user == null) {
+			return null;
+		}
+		
+		List<GrantedAuthority> auth = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_USER");
+		
+		DataSourceTable dataSourceTable = repository.findOne(user.getId());
+		
+		return new UserDetailsModify(user.getEmail(), user.getSenha(), auth, dataSourceTable);
+	}
+
+}
+```
+
+4) Pronto, basta criar agora o bean para configurar o spring security.
+
+```java
+	@Configuration
+	@Order(SecurityProperties.ACCESS_OVERRIDE_ORDER)
+	protected static class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+		@Autowired
+		private Users users;		
+		
+		@Autowired
+		public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
+			// @formatter:off	
+			
+			auth.userDetailsService(users);
+			
+		}
+	}
+```
 
 
 
