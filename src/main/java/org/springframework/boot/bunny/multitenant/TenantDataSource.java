@@ -78,9 +78,11 @@ public class TenantDataSource implements Serializable {
                     .password(config.getPassword())
                     .url(config.getUrl());
             DataSource ds = factory.build();
-            if (config.getInitialize()) {
+            
+            /*if (config.getInitialize()) {
                 initialize(ds);
-            }
+            }*/
+            
             return ds;
         }
         return null;

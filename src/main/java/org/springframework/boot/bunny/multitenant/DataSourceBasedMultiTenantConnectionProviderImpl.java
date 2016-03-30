@@ -1,5 +1,9 @@
 package org.springframework.boot.bunny.multitenant;
 
+import static org.springframework.boot.bunny.multitenant.MultiTenantConstants.DEFAULT_TENANT_ID;
+
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,7 +14,6 @@ import org.hibernate.engine.jdbc.connections.spi.AbstractDataSourceBasedMultiTen
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import static org.springframework.boot.bunny.multitenant.MultiTenantConstants.*;
 
 @Component
 public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDataSourceBasedMultiTenantConnectionProviderImpl {
@@ -25,6 +28,8 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
 
 	boolean init = false;
 
+	private static boolean forceIdentifyDefault = false;
+	
 	@PostConstruct
 	public void load() {
 		map.put(DEFAULT_TENANT_ID, defaultDS);
@@ -42,10 +47,25 @@ public class DataSourceBasedMultiTenantConnectionProviderImpl extends AbstractDa
 	protected DataSource selectDataSource(String tenantIdentifier) {
 		if (!init) {
 			init = true;
+			
+			forceIdentifyDefault = true;
 			TenantDataSource tenantDataSource = context.getBean(TenantDataSource.class);
 			map.putAll(tenantDataSource.getAll());
+			forceIdentifyDefault = false;
+			
 		}
 		return map.get(tenantIdentifier);
+	}
+	
+	@Override
+	public Connection getConnection(String tenantIdentifier)
+			throws SQLException {
+		
+		if( forceIdentifyDefault ){
+			return super.getConnection(MultiTenantConstants.DEFAULT_TENANT_ID);
+		}
+		
+		return super.getConnection(tenantIdentifier);
 	}
 	
 }
