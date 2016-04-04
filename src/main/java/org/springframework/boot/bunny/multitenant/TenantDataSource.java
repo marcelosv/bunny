@@ -8,11 +8,13 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.boot.bunny.multitenant.config.DataSourceConfig;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 public class TenantDataSource implements Serializable {
@@ -24,6 +26,9 @@ public class TenantDataSource implements Serializable {
 	
     private HashMap<String, DataSource> dataSources = new HashMap<>();
 
+//    @Value("${spring.jpa.properties.hibernate.hbm2ddl.import_files}")
+//    private String importFiles;
+    
     //@Autowired
     //private DataSourceConfigRepository configRepo;
 
@@ -93,10 +98,17 @@ public class TenantDataSource implements Serializable {
      * @param dataSource
      */
     private void initialize(DataSource dataSource) {
-        ClassPathResource schemaResource = new ClassPathResource("schema.sql");
-        ClassPathResource dataResource = new ClassPathResource("data.sql");
-        ResourceDatabasePopulator populator = new ResourceDatabasePopulator(schemaResource, dataResource);
-        populator.execute(dataSource);
+    	
+//    	if(StringUtils.isEmpty(importFiles)){
+//    		return;
+//    	}
+//    	
+//    	ClassPathResource importResource = new ClassPathResource(importFiles);
+    	
+//        ClassPathResource schemaResource = new ClassPathResource("schema.sql");
+//        ClassPathResource dataResource = new ClassPathResource("data.sql");
+//        ResourceDatabasePopulator populator = new ResourceDatabasePopulator(importResource);
+//        populator.execute(dataSource);
     }
 
 
