@@ -11,6 +11,7 @@
 
     <modules>
         <module>bunny</module>
+		<module>bunny-core</module>
 		<module>bunny-example</module>
     </modules>
     
