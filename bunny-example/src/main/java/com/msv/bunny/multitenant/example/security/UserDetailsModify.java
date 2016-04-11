@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
-import com.msv.bunny.multitenant.config.DataSourceConfig;
-import com.msv.bunny.multitenant.config.DataSourceConfigSecurity;
+import com.msv.bunny.core.config.DataSourceConfig;
+import com.msv.bunny.core.config.DataSourceConfigSecurity;
 import com.msv.bunny.multitenant.example.entity.DataSourceTable;
 
 public class UserDetailsModify extends User implements DataSourceConfigSecurity {

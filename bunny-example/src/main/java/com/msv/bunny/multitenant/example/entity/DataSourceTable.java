@@ -7,7 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.msv.bunny.multitenant.config.DataSourceConfig;
+import com.msv.bunny.core.config.DataSourceConfig;
 
 @Entity
 @Table(name="DATASOURCECONFIG")
