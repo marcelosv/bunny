@@ -1,4 +1,4 @@
-package com.msv.bunny.multitenant.exception;
+package com.msv.bunny.exception;
 
 public class BunnyNotConfigException extends RuntimeException{
 

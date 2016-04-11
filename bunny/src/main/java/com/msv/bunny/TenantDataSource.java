@@ -1,4 +1,4 @@
-package com.msv.bunny.multitenant;
+package com.msv.bunny;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -8,14 +8,14 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
-import com.msv.bunny.multitenant.config.DataSourceConfig;
+import com.msv.bunny.core.config.DataSourceConfig;
 
 @Component
 public class TenantDataSource implements Serializable {
@@ -75,6 +75,8 @@ public class TenantDataSource implements Serializable {
      * @param name
      * @return
      */
+    @Bean
+	@ConfigurationProperties(prefix = DataSourceProperties.PREFIX)
     private DataSource createDataSource(String name) {
         DataSourceConfig config = configTenant.getDataSourceConfigRepository().findByName(name);
         if (config != null) {

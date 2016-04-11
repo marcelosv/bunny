@@ -1,6 +1,6 @@
-package com.msv.bunny.multitenant;
+package com.msv.bunny;
 
-import static com.msv.bunny.multitenant.MultiTenantConstants.DEFAULT_TENANT_ID;
+import static com.msv.bunny.MultiTenantConstants.DEFAULT_TENANT_ID;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -1,11 +1,11 @@
-package com.msv.bunny.multitenant;
+package com.msv.bunny;
 
 import java.io.IOException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 
-import static com.msv.bunny.multitenant.MultiTenantConstants.*;
+import static com.msv.bunny.MultiTenantConstants.*;
 /**
  * Verifies if the request has the "tenant" header and configure it as attribute.
  * It will be used to Hibernate the multi-tenant support to define which datasource needs to be loaded.

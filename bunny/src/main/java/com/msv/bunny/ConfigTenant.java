@@ -1,4 +1,4 @@
-package com.msv.bunny.multitenant;
+package com.msv.bunny;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +11,11 @@ import org.hibernate.MultiTenancyStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
-
 //import org.springframework.boot.autoconfigure.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -27,10 +26,10 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.stereotype.Component;
 
-import com.msv.bunny.multitenant.config.DataSourceConfig;
-import com.msv.bunny.multitenant.config.DataSourceConfigRepository;
-import com.msv.bunny.multitenant.config.LoadDataSourceConfig;
-import com.msv.bunny.multitenant.exception.BunnyNotConfigException;
+import com.msv.bunny.core.config.DataSourceConfig;
+import com.msv.bunny.core.config.DataSourceConfigRepository;
+import com.msv.bunny.core.config.LoadDataSourceConfig;
+import com.msv.bunny.exception.BunnyNotConfigException;
 
 @PropertySource("classpath:application.properties")
 @EnableConfigurationProperties

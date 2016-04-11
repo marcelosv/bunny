@@ -1,4 +1,4 @@
-package com.msv.bunny.multitenant;
+package com.msv.bunny;
 
 import java.util.Map;
 
@@ -9,7 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-import com.msv.bunny.multitenant.config.LoadDataSourceConfig;
+import com.msv.bunny.core.config.LoadDataSourceConfig;
 
 @Configuration
 @PersistenceContext

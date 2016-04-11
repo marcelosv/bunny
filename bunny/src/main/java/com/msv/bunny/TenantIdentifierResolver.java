@@ -1,4 +1,7 @@
-package com.msv.bunny.multitenant;
+package com.msv.bunny;
+
+import static com.msv.bunny.MultiTenantConstants.CURRENT_TENANT_IDENTIFIER;
+import static com.msv.bunny.MultiTenantConstants.DEFAULT_TENANT_ID;
 
 import org.hibernate.context.spi.CurrentTenantIdentifierResolver;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -6,9 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 
-import com.msv.bunny.multitenant.config.DataSourceConfigSecurity;
-
-import static com.msv.bunny.multitenant.MultiTenantConstants.*;
+import com.msv.bunny.core.config.DataSourceConfigSecurity;
 
 @Component
 public class TenantIdentifierResolver implements CurrentTenantIdentifierResolver {

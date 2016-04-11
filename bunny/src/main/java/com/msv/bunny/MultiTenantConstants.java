@@ -1,4 +1,4 @@
-package com.msv.bunny.multitenant;
+package com.msv.bunny;
 
 public interface MultiTenantConstants {
 
