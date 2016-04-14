@@ -1,3 +1,5 @@
+# v0.0.5
+
 # spring-boot-bunny
 Este é um componente multitenant para ser usado em aplicações spring-boot.
 Com este componente, pode ser configurado múltiplas fontes de dados para manter os dados em diferentes esquemas.
