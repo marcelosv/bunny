@@ -17,8 +17,8 @@ import com.msv.bunny.multitenant.example.security.Users;
 
 @SpringBootApplication
 @LoadDataSourceConfig(config = DataSourceTable.class, configRepository = DataSourceTableRepository.class)
-@ComponentScan(basePackages = { "org.springframework.boot.bunny.multitenant",
-		" org.springframework.boot.bunny.multitenant.example" })
+@ComponentScan(basePackages = { "com.msv.bunny",
+		" com.msv.bunny.multitenant.example" })
 public class AppExample {
 
 	public static void main(String[] args) {
