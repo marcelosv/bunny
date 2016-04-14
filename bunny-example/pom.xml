@@ -4,11 +4,12 @@
 
 	<groupId>com.msv.bunny</groupId>
 	<artifactId>bunny-example</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<bunny.version>0.0.4-SNAPSHOT</bunny.version>
 	</properties>
 
 	<parent>
@@ -42,7 +43,7 @@
 		<dependency>
 			<groupId>com.msv.bunny</groupId>
 			<artifactId>bunny</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${bunny.version}</version>
 		</dependency>
 
 		<dependency>

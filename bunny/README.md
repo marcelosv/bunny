@@ -12,7 +12,7 @@ Que está usando o [Hibernate suporte multi-tenancy] (https://docs.jboss.org/hib
 	<dependency>
 		<groupId>com.msv</groupId>
 		<artifactId>bunny</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</dependency>
 ```
 		

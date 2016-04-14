@@ -1,9 +1,9 @@
 # spring-boot-bunny
-Este √© um componente multitenant para ser usado em aplica√ß√µes spring-boot.
-Com este componente, pode ser configurado m√∫ltiplas fontes de dados para manter os dados em diferentes esquemas.
-Que est√° usando o [Hibernate suporte multi-tenancy] (https://docs.jboss.org/hibernate/orm/4.2/devguide/en-US/html/ch16.html) trabalhando com a estrat√©gia de banco de dados separado.
+Este È um componente multitenant para ser usado em aplicaÁıes spring-boot.
+Com este componente, pode ser configurado m˙ltiplas fontes de dados para manter os dados em diferentes esquemas.
+Que est· usando o [Hibernate suporte multi-tenancy] (https://docs.jboss.org/hibernate/orm/4.2/devguide/en-US/html/ch16.html) trabalhando com a estratÈgia de banco de dados separado.
 
-## Configura√ß√£o
+## ConfiguraÁ„o
 1) Baixar o projeto no git https://github.com/betao22ster/bunny, dar o install do maven.
 
 2) No seu projeto, adicionar a dependencia:
@@ -12,7 +12,7 @@ Que est√° usando o [Hibernate suporte multi-tenancy] (https://docs.jboss.org/hib
 	<dependency>
 		<groupId>com.msv</groupId>
 		<artifactId>bunny</artifactId>
-		<version>0.0.2-SNAPSHOT</version>
+		<version>0.0.4-SNAPSHOT</version>
 	</dependency>
 ```
 		
@@ -76,20 +76,20 @@ public interface DataSourceTableRepository extends DataSourceConfigRepository<Da
 
 ```
 
-## Configura√ß√£o do Spring Security
+## ConfiguraÁ„o do Spring Security
 Porque integrar com o Spring Security?<br>
-Quando o sistema √© integrado ao Spring Security, ap√≥s o login, os dados do usu√°rio ficam registrados.<br> 
-√â poss√≠vel obter os dados do login como est√° abaixo ou injetando.<br>
+Quando o sistema È integrado ao Spring Security, apÛs o login, os dados do usu·rio ficam registrados.<br> 
+… possÌvel obter os dados do login como est· abaixo ou injetando.<br>
 
 ```java
 	SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 ```
 
 Desta forma, podemos ter neste objeto, os dados que o bunny precisa.<br>
-Na classe TenantIdentifierResolver do bunny ele identifica se o j√° existe um usu√°rio logado, e j√° retorna o identificador do tenancy.<br>
-Para nos isso √© importante. 
+Na classe TenantIdentifierResolver do bunny ele identifica se o j· existe um usu·rio logado, e j· retorna o identificador do tenancy.<br>
+Para nos isso È importante. 
 <br>
-Caso esteja em um projeto de micro-service, os demais servi√ßos, iram j√° funcionar corretamente, identificando o tenancy pelo usu√°rio logado.<br>
+Caso esteja em um projeto de micro-service, os demais serviÁos, iram j· funcionar corretamente, identificando o tenancy pelo usu·rio logado.<br>
 
 Vamos configurar o spring security:
 1) Deve ser usado no maven a seguinte dependencia.
@@ -122,9 +122,9 @@ public class UserDetailsModify extends User implements DataSourceConfigSecurity 
 }
 ```
 
-O importante nesta classe, para o bunny, √© a implementa√ß√£o da classe DataSourceConfigSecurity.
+O importante nesta classe, para o bunny, È a implementaÁ„o da classe DataSourceConfigSecurity.
 
-3) Crie um service b√°sico, para consultar os dados do login.
+3) Crie um service b·sico, para consultar os dados do login.
 
 ```java
 @Service
@@ -139,7 +139,7 @@ public class Users implements UserDetailsService {
 	@Override
 	public OpsUserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 		
-		// sua entidade da tabela de usu√°rio normal
+		// sua entidade da tabela de usu·rio normal
 		Usuario user = repo.findByEmail(email);
 		
 		if (user == null) {
@@ -177,7 +177,7 @@ public class Users implements UserDetailsService {
 ```
 
 ## Executando 
-Na sua classe principal, adicionar a anota√ß√£o @LoadDataSourceConfig adicionando as duas classes criadas e a anota√ß√£o @ComponentScan com o pacote do bunny.
+Na sua classe principal, adicionar a anotaÁ„o @LoadDataSourceConfig adicionando as duas classes criadas e a anotaÁ„o @ComponentScan com o pacote do bunny.
 
 ```java
 @LoadDataSourceConfig(config=DataSourceTable.class, configRepository=DataSourceTableRepository.class)

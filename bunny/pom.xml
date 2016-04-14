@@ -4,7 +4,7 @@
 
 	<groupId>com.msv.bunny</groupId>
 	<artifactId>bunny</artifactId>
-	<version>0.0.3-SNAPSHOT</version>
+	<version>0.0.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>bunny</name>
@@ -20,6 +20,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
+		<bunny.version>0.0.4-SNAPSHOT</bunny.version>
 	</properties>
 
 	<dependencies>
@@ -53,7 +54,7 @@
 		<dependency>
 			<groupId>com.msv.bunny</groupId>
 			<artifactId>bunny-core</artifactId>
-			<version>0.0.3-SNAPSHOT</version>
+			<version>${bunny.version}</version>
 		</dependency>
 				
 	</dependencies>

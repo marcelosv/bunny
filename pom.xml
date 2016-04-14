@@ -12,7 +12,6 @@
     <modules>
         <module>bunny</module>
 		<module>bunny-core</module>
-		<module>bunny-schema</module>
 		<module>bunny-example</module>
     </modules>
     

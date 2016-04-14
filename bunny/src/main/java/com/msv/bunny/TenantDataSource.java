@@ -75,8 +75,6 @@ public class TenantDataSource implements Serializable {
      * @param name
      * @return
      */
-    @Bean
-	@ConfigurationProperties(prefix = DataSourceProperties.PREFIX)
     private DataSource createDataSource(String name) {
         DataSourceConfig config = configTenant.getDataSourceConfigRepository().findByName(name);
         if (config != null) {
