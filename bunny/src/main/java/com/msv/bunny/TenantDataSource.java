@@ -9,9 +9,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
-import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.stereotype.Component;
 
@@ -64,7 +62,8 @@ public class TenantDataSource implements Serializable {
 		List<DataSourceConfig> configList = configTenant.getDataSourceConfigRepository().findAll();
 		Map<String, DataSource> result = new HashMap<>();
 		for (DataSourceConfig config : configList) {
-			DataSource dataSource = getDataSource(config.getName());
+			//DataSource dataSource = getDataSource(config.getName());
+			DataSource dataSource = createDataSource(config);
 			result.put(config.getName(), dataSource);
 		}
 		return result;
@@ -78,9 +77,14 @@ public class TenantDataSource implements Serializable {
 	 * @return
 	 */
 	private DataSource createDataSource(String name) {
-		DataSourceConfig config = configTenant.getDataSourceConfigRepository().findByName(name);
+		DataSourceConfig config = (DataSourceConfig) configTenant.getDataSourceConfigRepository().findByName(name);
 		if (config != null) {
-
+			return createDataSource(config);
+		}
+		return null;
+	}
+	
+	private DataSource createDataSource(DataSourceConfig config) {
 			final SimpleDriverDataSource ds = new SimpleDriverDataSource();
 			try {
 				ds.setDriver((Driver) Class.forName(config.getDriverClassName()).newInstance());
@@ -111,8 +115,6 @@ public class TenantDataSource implements Serializable {
 			 */
 
 			return ds;
-		}
-		return null;
 	}
 
 	/**

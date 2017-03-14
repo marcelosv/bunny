@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface DataSourceConfigRepository<T> {
 
-    DataSourceConfig findByName(String nome);
+    T findByName(String nome);
 	List<T> findAll();
 	
 }
