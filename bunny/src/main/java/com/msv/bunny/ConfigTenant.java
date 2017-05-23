@@ -4,15 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.persistence.PersistenceContext;
-import javax.servlet.Filter;
 import javax.sql.DataSource;
 
 import org.hibernate.MultiTenancyStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;
-//import org.springframework.boot.autoconfigure.orm.jpa.EntityManagerFactoryBuilder;
-import org.springframework.boot.context.embedded.FilterRegistrationBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -32,14 +29,18 @@ import com.msv.bunny.core.config.LoadDataSourceConfig;
 import com.msv.bunny.exception.BunnyNotConfigException;
 
 @PropertySource("classpath:application.properties")
-@EnableConfigurationProperties
+//@EnableConfigurationProperties
 @Configuration
 @PersistenceContext
 @Component
+@EnableConfigurationProperties(Properties.class)
 public class ConfigTenant {
 
 	@Autowired
 	private ResolverConfig resolverConfig;
+	
+	@Autowired
+	private Properties properties;;
 	
 	private LoadDataSourceConfig loadConfig;
 
@@ -55,7 +56,7 @@ public class ConfigTenant {
 	@Autowired
 	AutowireCapableBeanFactory beanFactory;
 
-	@Bean
+	/*@Bean
 	public FilterRegistrationBean myFilter() {
 		FilterRegistrationBean registration = new FilterRegistrationBean();
 		Filter tenantFilter = new MultiTenantFilter();
@@ -63,7 +64,7 @@ public class ConfigTenant {
 		registration.setFilter(tenantFilter);
 		registration.addUrlPatterns("/*");
 		return registration;
-	}
+	}*/
 
 	@Bean
 	public JpaVendorAdapter jpaVendorAdapter() {
@@ -87,7 +88,7 @@ public class ConfigTenant {
 		LocalContainerEntityManagerFactoryBean result = builder.dataSource(dataSource())
 				.persistenceUnit(MultiTenantConstants.TENANT_KEY)
 				.properties(props)
-				.packages(getDataSourceConfig()).build();
+				.packages(getDataSourceConfig().getName(), properties.getEntity()).build();
 		
 		result.setJpaVendorAdapter(jpaVendorAdapter());
 		return result;

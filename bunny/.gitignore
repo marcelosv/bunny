@@ -2,4 +2,4 @@
 .project
 .settings/
 target/
-/.apt_generated/
+bin/

@@ -4,12 +4,12 @@
 
 	<groupId>com.msv.bunny</groupId>
 	<artifactId>bunny-core</artifactId>
-	<version>0.0.5-SNAPSHOT</version>
+	<version>1.2017.5.0</version>
 	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<bunny.version>0.0.5-SNAPSHOT</bunny.version>
+		<bunny.version>1.2017.5.0</bunny.version>
 	</properties>
 
 	<dependencies>

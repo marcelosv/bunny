@@ -4,18 +4,18 @@
 
 	<groupId>com.msv.bunny</groupId>
 	<artifactId>bunny-example</artifactId>
-	<version>0.0.4-SNAPSHOT</version>
+	<version>1.2017.5.0</version>
 	<packaging>jar</packaging>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<bunny.version>0.0.4-SNAPSHOT</bunny.version>
+		<bunny.version>1.2017.5.0</bunny.version>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.3.3.RELEASE</version>
+		<version>1.5.2.RELEASE</version>
 	</parent>
 
 	<dependencies>
