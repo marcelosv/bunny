@@ -101,6 +101,12 @@ public class TenantDataSource implements Serializable {
 			properties.put("spring.datasource.validationQuery","SELECT 1");
 			properties.put("spring.datasource.max-wait", "10000");
 			properties.put("spring.datasource.test-on-borrow","true");
+			properties.put("spring.datasource.tomcat.max-active","5");
+			properties.put("spring.datasource.tomcat.initial-size","2");
+			properties.put("spring.datasource.tomcat.min-idle","1");
+			properties.put("spring.datasource.tomcat.max-idle","3");
+
+
 			ds.setConnectionProperties(properties);
 
 			/*
